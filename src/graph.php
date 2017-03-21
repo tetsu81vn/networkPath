@@ -246,4 +246,60 @@ class Graph
             $this->addEdge($to, $from, $latency, true);
         }
     }
+
+    /**
+     * Depth First Search with constraints
+     * @param string $start
+     * @param array $visited
+     */
+    public function depthFirstSearch($start = "", $visited = array())
+    {
+        if($this->getStopValue() > 0)
+        {
+            return;
+        }
+
+        if (empty($start))
+        {
+            $start = $this->getStart();
+        }
+
+
+        $visited[$start] = true;
+        $currentNode = $this->vertices[$start];
+
+        if (!isset($this->edges[$start]))
+        {
+            return;
+        }
+
+        $edges = $this->edges[$start];
+        foreach ($edges as $edge) {
+            if (!isset($visited[$edge["to"]]))
+            {
+                $sum = $this->getSum();
+                $sum += $edge["latency"];
+                $this->setSum($sum);
+
+                $this->appendPath($edge["to"]);
+
+                if  ($edge["to"] == $this->getEnd())
+                {
+                    $this->appendPath("[=]" . $sum, "");
+                    $this->appendPath("|", "");
+                    if ($sum <= $this->getMaxTime()) {
+                        $this->setStopValue($sum);
+                        break;
+                    }
+
+                    $sum = 0;
+                    $this->setSum($sum);
+                    break;
+                }
+
+                $this->depthFirstSearch($edge["to"], $visited);
+            }
+        }
+    }
+
 }
