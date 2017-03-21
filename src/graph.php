@@ -29,6 +29,186 @@ class Graph
     protected $stopValue;
 
     /**
+     * @return mixed
+     */
+    public function getBackwardSearch()
+    {
+        return $this->backwardSearch;
+    }
+
+    /**
+     * @param mixed $backwardSearch
+     */
+    public function setBackwardSearch($backwardSearch)
+    {
+        $this->backwardSearch = $backwardSearch;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getVertices()
+    {
+        return $this->vertices;
+    }
+
+    /**
+     * @param mixed $vertices
+     */
+    public function setVertices($vertices)
+    {
+        $this->vertices = $vertices;
+    }
+
+    /**
+     * @return array
+     */
+    public function getEdges()
+    {
+        return $this->edges;
+    }
+
+    /**
+     * @param array $edges
+     */
+    public function setEdges($edges)
+    {
+        $this->edges = $edges;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDirected()
+    {
+        return $this->directed;
+    }
+
+    /**
+     * @param bool $directed
+     */
+    public function setDirected($directed)
+    {
+        $this->directed = $directed;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStopValue()
+    {
+        return $this->stopValue;
+    }
+
+    /**
+     * @param int $stopValue
+     */
+    public function setStopValue($stopValue)
+    {
+        $this->stopValue = $stopValue;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaxTime()
+    {
+        return $this->maxTime;
+    }
+
+    /**
+     * @param mixed $maxTime
+     */
+    public function setMaxTime($maxTime)
+    {
+        $this->maxTime = $maxTime;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSum()
+    {
+        return $this->sum;
+    }
+
+    /**
+     * @param mixed $sum
+     */
+    public function setSum($sum)
+    {
+        $this->sum = $sum;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param mixed $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStart()
+    {
+        return $this->start;
+    }
+
+    /**
+     * @param mixed $start
+     */
+    public function setStart($start)
+    {
+        $this->start = $start;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnd()
+    {
+        return $this->end;
+    }
+
+    /**
+     * @param mixed $end
+     */
+    public function setEnd($end)
+    {
+        $this->end = $end;
+    }
+
+    /**
+     * @param $node
+     * @param string $seperator
+     */
+    public function appendPath($node, $seperator = " => ")
+    {
+        $this->path .= $seperator . $node;
+    }
+
+    /**
+     * Reset flags for running a new search
+     */
+    public function resetPath()
+    {
+        $this->path = "";
+        $this->sum = 0;
+        $this->stopValue = 0;
+    }
+
+    /**
      * Graph constructor.
      * @param array $vertexes
      * @param array $edges
