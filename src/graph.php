@@ -344,4 +344,64 @@ class Graph
         }
     }
 
+    /**
+     * Display search result
+     */
+    public function displaySearch()
+    {
+        $result = $this->getPath();
+        // Format paths
+        $pathList = explode("|", $result);
+        // remove last empty path
+        array_pop($pathList);
+        echo "Output: ";
+
+        // Show path immediately if only 1 path
+        if(count($pathList) == 1 && !$this->getBackwardSearch())
+        {
+            echo $this->getStart() .  str_replace("[=]", " => ", $pathList[0]) . PHP_EOL;
+        }
+        else
+        {
+            // there are many paths from source to destination, so we find the nearest to max latency time
+            $sortedPath = array();
+
+            // build new path list
+            foreach ($pathList as $path)
+            {
+                $pathTime = explode("[=]", $path);
+                $key = $this->getStart() . $pathTime[0];
+                $value = $pathTime[1];
+                $sortedPath[$key] = $value;
+            }
+
+            // sort path list by total times, high to low
+            arsort ($sortedPath);
+            // display nearest path compare with max latency time
+            foreach ($sortedPath as $path => $time)
+            {
+                if($time <= $this->getMaxTime())
+                {
+                    // if this is backward search, reformat path
+                    if ($this->getBackwardSearch())
+                    {
+                        $reversePath = explode(" => ", $path);
+                        // display reverse paths
+                        $reversePath = array_reverse($reversePath);
+                        $reversePath = implode(' => ', $reversePath);
+                        echo $reversePath . " => " . $time . PHP_EOL;
+                    }
+                    else
+                    {
+                        // display path
+                        echo $path . " => " . $time . PHP_EOL;
+                    }
+                    // break foreach
+                    break;
+                }
+            }
+        }
+        // clear path list for new search;
+        $this->resetPath();
+    }
 }
