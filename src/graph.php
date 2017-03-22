@@ -264,7 +264,6 @@ class Graph
             $start = $this->getStart();
         }
 
-
         $visited[$start] = true;
         $currentNode = $this->vertices[$start];
 
@@ -299,6 +298,49 @@ class Graph
 
                 $this->depthFirstSearch($edge["to"], $visited);
             }
+        }
+    }
+
+    /**
+     *  display network paths
+     */
+    public function networkPath()
+    {
+        echo str_repeat("-", 50);
+        echo PHP_EOL;
+        printf("Input: %s %s %d %s", $this->getStart(), $this->getEnd(), $this->getMaxTime(), PHP_EOL);
+
+        // call search
+        $this->depthFirstSearch();
+        $result = $this->getPath();
+
+
+        if ($this->getStopValue() <= 0)
+        {
+            // not found any paths , Retry  1 more time by searching backward
+            $start = $this->getStart();
+            $end = $this->getEnd();
+            $this->resetPath();
+            $this->setStart($end);
+            $this->setEnd($start);
+            // call search
+            $this->depthFirstSearch();
+
+            if ($this->getStopValue() <= 0) {
+                // not founds any paths, so stop searching
+                echo "Path not found" . PHP_EOL;
+                return;
+            }
+            else
+            {
+                // found paths by searching backward
+                // flag this is a backward search for formatting display later
+                $this->setBackwardSearch(true);
+                //display result
+                $this->displaySearch();;
+            }
+        } else {
+            $this->displaySearch();
         }
     }
 
