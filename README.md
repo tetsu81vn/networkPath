@@ -50,7 +50,7 @@ Please commit all your code to a Github public repository and send us the URL. W
 
 ## How to use:
 
-Move to working folder (folder where contain main.php file), type this command in terminal / command line :
+Move to working folder (folder where contains main.php file), type this command in terminal / command line :
 ```bash
   php main.php pathToFileCSV
 ```
@@ -60,9 +60,9 @@ Example:
   php main.php ./data/data.csv
 ```
 
-## How to edit code and test:
+## How to edit testing code and run test:
 
- You can edit ./test/graphTest.php to add data by hand insted of loading from csv file. After editing, you can run test :
+ You can edit ./test/graphTest.php to add data by hand instead of  loading from csv file. After editing, you can run test :
  
  ```bash
   php ./test/graphTest.php
