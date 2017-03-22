@@ -7,12 +7,14 @@ Imagine that there is a small network with a number of interconnected devices. E
 * CSV file structure:
   * Format: Device From, Device To, Latency (milliseconds) 
   * Contents: 
+  ```bash
         A,B,10
         A,C,20 
         B,D,100 
         C,D,30 
         D,E,10 
         E,F,1000 
+  ```        
   * Interpretation:
       A connects to B and it takes 10 milliseconds for signal to travel between two devices. A to C and it takes 20 milliseconds, B to D and it takes 100 milliseconds etc.
 * The program should then continually wait for user input. Format should be [Device From] [Device To] [Time] (e.g A F 1000 followed by ENTER key). If the signal can travel from A to F in 1000ms or less then output the signal path and total travel time in milliseconds otherwise print "Path not found". If user enters QUIT then terminate the program.
@@ -27,6 +29,7 @@ Please commit all your code to a Github public repository and send us the URL. W
 
 ## Sample Input / Output (based on above CSV data):
 
+```bash
  Input: A F 1000 
  Output: Path not found
 
@@ -41,3 +44,27 @@ Please commit all your code to a Github public repository and send us the URL. W
 
  Input: E A 80
  Output: E => D => C => A => 60
+``` 
+
+## Requirement: php version >= 5.5
+
+## How to use:
+
+Move to working folder (folder where contain main.php file), type this command in terminal / command line :
+```bash
+  php main.php pathToFileCSV
+```
+
+Example: 
+```bash
+  php main.php ./data/data.csv
+```
+
+## How to edit code and test:
+
+ You can edit ./test/graphTest.php to add data by hand insted of loading from csv file. After editing, you can run test :
+ 
+ ```bash
+  php ./test/graphTest.php
+```
+
